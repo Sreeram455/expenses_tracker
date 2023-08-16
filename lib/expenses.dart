@@ -11,6 +11,7 @@ class Expenses extends StatefulWidget{
 }
 class _ExpensesState extends State<Expenses>{
   @override
+
   final List<Expense> _registeredExpenses=[
     Expense(title:'flutter course',
     amount: 200,
@@ -19,9 +20,14 @@ class _ExpensesState extends State<Expenses>{
     Expense(title: 'cinema', amount: 200, date: DateTime.now(), category:Category.Leisure)
 
   ];
+  void _addExpense(Expense expense){
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
   void _openAddExpenses(){
-    showModalBottomSheet(context: context, builder:
-    (ctx)=> const NewExpense());
+    showModalBottomSheet(isScrollControlled:true,context: context, builder:
+    (ctx)=> NewExpense(onAddExpense: _addExpense,));
   }
   @override
   Widget build(context){
